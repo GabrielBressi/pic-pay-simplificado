@@ -1,4 +1,5 @@
-# Sistema de Transferência de Dinheiro 💸
+# Desafio Back-end PicPay
+## Sistema de Transferência de Dinheiro 💸
 
 Este é um sistema de transferência de dinheiro onde usuários comuns e lojistas podem enviar e receber dinheiro entre si. 
 O sistema verifica tipo de usuário, saldo antes da transferência consulta um serviço autorizador externo(mock) antes de finalizar a transferência e envia notificações aos usuários ou lojistas após o recebimento do pagamento.
