@@ -25,5 +25,39 @@ public class TransactionModel {
 
     private LocalDateTime timestamp;
 
+    public Long getId() {
+        return Id;
+    }
 
+    public UserModel getPayer() {
+        return payer;
+    }
+
+    public void setPayer(UserModel payer) {
+        this.payer = payer;
+    }
+
+    public UserModel getPayee() {
+        return payee;
+    }
+
+    public void setPayee(UserModel payee) {
+        this.payee = payee;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }
