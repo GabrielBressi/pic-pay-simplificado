@@ -1,6 +1,7 @@
 package com.picpaysimplificado.models.users;
 
 
+import com.picpaysimplificado.models.users.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
