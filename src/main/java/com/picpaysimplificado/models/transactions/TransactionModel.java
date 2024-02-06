@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Entity(name = "transactions")
 @Table(name = "transactions")
 public class TransactionModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -24,6 +23,15 @@ public class TransactionModel {
     private BigDecimal amount;
 
     private LocalDateTime timestamp;
+
+    public TransactionModel() {}
+
+    public TransactionModel(UserModel payer, UserModel payee, BigDecimal amount, LocalDateTime timestamp) {
+        this.payer = payer;
+        this.payee = payee;
+        this.amount = amount;
+        this.timestamp = timestamp;
+    }
 
     public Long getId() {
         return Id;

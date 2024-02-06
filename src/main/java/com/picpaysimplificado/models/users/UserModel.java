@@ -1,6 +1,7 @@
 package com.picpaysimplificado.models.users;
 
 
+import com.picpaysimplificado.dtos.UserDTO;
 import com.picpaysimplificado.models.users.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -28,6 +29,18 @@ public class UserModel {
     private BigDecimal balance;
 
     private UserType userType;
+
+    public UserModel(UserDTO data) {
+        this.firstName = data.fistname();
+        this.lastName = data.lastname();
+        this.document = data.document();
+        this.balance = data.balance();
+        this.userType = data.userType();
+        this.email = data.email();
+        this.password = data.password();
+    }
+
+    public UserModel() {}
 
     public Long getUserId() {
         return userId;
