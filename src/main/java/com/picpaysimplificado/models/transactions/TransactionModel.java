@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity(name = "transactions")
+@Table(name = "transactions")
 public class TransactionModel {
 
     @Id
