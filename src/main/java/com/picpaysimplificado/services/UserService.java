@@ -22,7 +22,7 @@ public class UserService {
         }
 
         if(payer.getBalance().compareTo(amount) < 0) {
-            throw new Exception(String.format("Usuário id:%s não possui saldo suficiente", payer.getUserId().toString()));
+            throw new Exception(String.format("id: %s, %s %s não possui saldo suficiente", payer.getUserId().toString(), payer.getFirstName(), payer.getLastName()));
         }
     }
 

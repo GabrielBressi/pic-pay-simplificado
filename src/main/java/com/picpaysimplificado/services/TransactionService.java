@@ -35,7 +35,6 @@ public class TransactionService {
     @Value("${transaction.checker}")
     private String transactionChecker;
 
-
     public TransactionModel createTransaction(TransactionDTO transaction) throws Exception {
         UserModel payer = this.userService.findUserById(transaction.payer_id());
         UserModel payee = this.userService.findUserById(transaction.payee_id());
@@ -47,18 +46,8 @@ public class TransactionService {
             throw new Exception("Transação não autorizada");
         }
 
-        TransactionModel transactionModel = new TransactionModel();
-        transactionModel.setAmount(transaction.value());
-        transactionModel.setPayer(payer);
-        transactionModel.setPayee(payee);
-        transactionModel.setTimestamp(LocalDateTime.now());
-
-        payer.setBalance(payer.getBalance().subtract(transaction.value()));
-        payee.setBalance(payee.getBalance().add(transaction.value()));
-
-        this.transactionRepository.save(transactionModel);
-        this.userService.saveUser(payer);
-        this.userService.saveUser(payee);
+        TransactionModel transactionModel = populateAndSaveTransaction(payer, payee, transaction.value());
+        updateBalances(payer, payee, transaction.value());
 
         this.notificationService.sendNotification(payer, "Transação realizada com sucesso");
         this.notificationService.sendNotification(payee, "Transação recebida com sucesso");
@@ -75,6 +64,24 @@ public class TransactionService {
       }
 
       return false;
+    }
+
+    public TransactionModel populateAndSaveTransaction(UserModel payer, UserModel payee, BigDecimal value) {
+        TransactionModel transactionModel = new TransactionModel();
+        transactionModel.setAmount(value);
+        transactionModel.setPayer(payer);
+        transactionModel.setPayee(payee);
+        transactionModel.setTimestamp(LocalDateTime.now());
+
+        return this.transactionRepository.save(transactionModel);
+    }
+
+    private void updateBalances(UserModel payer, UserModel payee, BigDecimal value) throws Exception {
+        payer.setBalance(payer.getBalance().subtract(value));
+        payee.setBalance(payee.getBalance().add(value));
+
+        userService.saveUser(payer);
+        userService.saveUser(payee);
     }
 
 }
