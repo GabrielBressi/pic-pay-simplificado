@@ -40,6 +40,17 @@ public class UserModel {
         this.password = data.password();
     }
 
+    public UserModel(Long userId, String firstName, String lastName, String document, String email, String password, BigDecimal balance, UserType userType) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.document = document;
+        this.email = email;
+        this.password = password;
+        this.balance = balance;
+        this.userType = userType;
+    }
+
     public UserModel() {}
 
     public Long getUserId() {
