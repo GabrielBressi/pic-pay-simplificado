@@ -1,6 +1,8 @@
 package com.picpaysimplificado.services;
 
 import com.picpaysimplificado.dtos.UserDTO;
+import com.picpaysimplificado.exceptions.UserShopKeeperTransactionException;
+import com.picpaysimplificado.exceptions.UserWithNoBalanceException;
 import com.picpaysimplificado.models.users.UserModel;
 import com.picpaysimplificado.models.users.UserType;
 import com.picpaysimplificado.repositories.UserRepository;
@@ -16,13 +18,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void validateTransaction(UserModel payer, BigDecimal amount) throws Exception {
+    public void validateTransaction(UserModel payer, BigDecimal amount) {
         if(payer.getUserType() == UserType.SHOPKEEPER) {
-            throw new Exception("Usuário do tipo logista não está autorizado a realizar transação.");
+            throw new UserShopKeeperTransactionException();
         }
 
         if(payer.getBalance().compareTo(amount) < 0) {
-            throw new Exception(String.format("id: %s, %s %s não possui saldo suficiente", payer.getUserId().toString(), payer.getFirstName(), payer.getLastName()));
+            throw new UserWithNoBalanceException();
         }
     }
 

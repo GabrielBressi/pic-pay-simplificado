@@ -64,22 +64,11 @@ class UserServiceTest {
                 UserType.COMMON
         );
 
-        UserModel payee = new UserModel(
-                1L,
-                "Maria",
-                "Santos",
-                "99999999902",
-                "maria@gmail.com",
-                "12345678",
-                new BigDecimal(10),
-                UserType.COMMON
-        );
-
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             userService.validateTransaction(payer, new BigDecimal(10));
         });
 
-        Assertions.assertEquals(String.format("id: %s, %s %s não possui saldo suficiente", payer.getUserId().toString(), payer.getFirstName(), payer.getLastName()), thrown.getMessage());
+        Assertions.assertEquals("Saldo insuficiente", thrown.getMessage());
     }
     
 }
