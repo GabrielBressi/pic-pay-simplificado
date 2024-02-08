@@ -41,8 +41,12 @@ Realize o cadastro de usuários comuns e lojistas.
 Efetue transferências de dinheiro entre os usuários cadastrados.
 Verifique as notificações recebidas após o recebimento do pagamento.
 API Endpoints
-- /api/users: CRUD de usuários comuns e lojistas.
-- /api/transactions: Endpoint para realizar transferências de dinheiro.
+```bash
+GET /users - Retrieve a list of all users. (all authenticated users)
+POST /auth/register - Register a new user into the App
+POST /auth/login - Login into the App
+POST /transactions - Register a new transaction. (only COMMON authenticated users)
+```
 
 ### Contribuindo
 Contribuições são bem-vindas! Sinta-se à vontade para abrir um PR para melhorias, correções de bugs ou novos recursos.
