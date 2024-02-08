@@ -1,10 +1,14 @@
 package com.picpaysimplificado.services;
 
 import com.picpaysimplificado.models.users.UserModel;
+import com.picpaysimplificado.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,13 +18,16 @@ import java.util.Map;
 import static com.picpaysimplificado.constants.AppConstants.*;
 
 @Service
-public class AuthorizationService {
+public class AuthorizationService implements UserDetailsService {
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private UserRepository userRepository;
 
     @Value("${transaction.checker}")
     private String transactionChecker;
+
 
 
     public boolean authorizeTransaction(UserModel user, BigDecimal value) {
@@ -32,5 +39,10 @@ public class AuthorizationService {
         }
 
         return false;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username);
     }
 }
