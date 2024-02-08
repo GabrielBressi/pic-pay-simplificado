@@ -2,7 +2,7 @@ package com.picpaysimplificado.repositories;
 
 import com.picpaysimplificado.dtos.UserDTO;
 import com.picpaysimplificado.models.users.UserModel;
-import com.picpaysimplificado.models.users.UserType;
+import com.picpaysimplificado.models.users.UserRole;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ class UserRepositoryTest {
                 new BigDecimal(10),
                 "test@gmail.com",
                 "12345678",
-                UserType.COMMON
+                UserRole.COMMON
         );
         this.createUser(data);
 

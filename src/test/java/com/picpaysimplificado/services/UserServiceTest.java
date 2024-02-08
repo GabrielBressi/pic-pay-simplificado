@@ -1,7 +1,7 @@
 package com.picpaysimplificado.services;
 
 import com.picpaysimplificado.models.users.UserModel;
-import com.picpaysimplificado.models.users.UserType;
+import com.picpaysimplificado.models.users.UserRole;
 import com.picpaysimplificado.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +13,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-
-import static org.mockito.Mockito.when;
 
 class UserServiceTest {
     @Mock
@@ -33,14 +31,13 @@ class UserServiceTest {
     @DisplayName("Should throw exception if UserType is SHOPKEEPER")
     void validateTransactionCase1() throws Exception {
         UserModel payer = new UserModel(
-                1L,
                 "Joao",
                 "Silva",
                 "99999999901",
                 "joao@gmail.com",
                 "12345678",
                 new BigDecimal(10),
-                UserType.SHOPKEEPER
+                UserRole.SHOPKEEPER
         );
 
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
@@ -54,14 +51,13 @@ class UserServiceTest {
     @DisplayName("Should throw exception when User is with insufficient balance")
     void validateTransactionCase2() throws Exception {
         UserModel payer = new UserModel(
-                1L,
                 "Joao",
                 "Silva",
                 "99999999901",
                 "joao@gmail.com",
                 "12345678",
                 new BigDecimal(0),
-                UserType.COMMON
+                UserRole.COMMON
         );
 
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
