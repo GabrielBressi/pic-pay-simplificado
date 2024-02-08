@@ -4,7 +4,7 @@ import com.picpaysimplificado.dtos.UserDTO;
 import com.picpaysimplificado.exceptions.UserShopKeeperTransactionException;
 import com.picpaysimplificado.exceptions.UserWithNoBalanceException;
 import com.picpaysimplificado.models.users.UserModel;
-import com.picpaysimplificado.models.users.UserType;
+import com.picpaysimplificado.models.users.UserRole;
 import com.picpaysimplificado.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public void validateTransaction(UserModel payer, BigDecimal amount) {
-        if(payer.getUserType() == UserType.SHOPKEEPER) {
+        if(payer.getRole() == UserRole.SHOPKEEPER) {
             throw new UserShopKeeperTransactionException();
         }
 

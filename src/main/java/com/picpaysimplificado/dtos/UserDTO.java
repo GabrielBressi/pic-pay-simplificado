@@ -1,13 +1,14 @@
 package com.picpaysimplificado.dtos;
 
-import com.picpaysimplificado.models.users.UserType;
+import com.picpaysimplificado.models.users.UserRole;
 
 import java.math.BigDecimal;
 
-public record UserDTO(String fistname, String lastname, String document, BigDecimal balance, String email, String password, UserType userType) {
+public record UserDTO(String firstname, String lastname, String document, BigDecimal balance, String email, String password, UserRole role) {
+
     @Override
-    public String fistname() {
-        return fistname;
+    public String firstname() {
+        return firstname;
     }
 
     @Override
@@ -34,9 +35,8 @@ public record UserDTO(String fistname, String lastname, String document, BigDeci
     public String password() {
         return password;
     }
-
     @Override
-    public UserType userType() {
-        return userType;
+    public UserRole role() {
+        return role;
     }
 }
