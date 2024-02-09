@@ -36,4 +36,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public void saveUser(UserModel user) {
+        this.userRepository.save(user);
+    }
 }
